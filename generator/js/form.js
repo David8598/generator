@@ -23,6 +23,6 @@ fetch('../json/region_ru.json')
 // скрипт для формы 
 $(document).ready(function() {
     $('#citySelect').select2({
-        closeOnSelect: false // Не закрывать меню при выборе
+        placeholder: "начните вводить"
     });
 });

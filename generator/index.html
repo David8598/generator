@@ -5,12 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <style href="css/style.css"></style>
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    
+    <link href="../generator/css/reset.css" rel="stylesheet" >
+    <link href="../generator/css/style.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     
 </head>
-<body>
+
+    <header class="header">
+        <div class="container">       
+            <div class="header__content">
+                <a href="#" class="logo">PIDORAS</a>
+                <nav class="menu">
+                    <ul class="menu__list">
+                        <li class="menu__item"><a href="" class="menu__content">театр</a></li>
+                        <li class="menu__item"><a href="" class="menu__content">кино</a></li>
+                        <li class="menu__item"><a href="" class="menu__content">стендап</a></li>
+                        <li class="menu__item"><a href="" class="menu__content">балет</a></li>
+                    </ul>                                      
+                </nav>    
+            </div>
+        </div>
+    </header>
+
+<body style="height: 1000px;">
+
+    <div class="container">
     <form action="" id="generate_form" aria-required="true">
        <select name="theme" id="theme">
         <option value="театр">театр</option>
@@ -32,10 +53,20 @@
        <select name="city" id="city" multiple="multiple" style="width: 200px;">
        </select>
     </form>
-
+    </div>
       
 
     <script src="js/main.js"></script>
     <script src="js/form.js"></script>
 </body>
+<footer class="footer">
+    <div class="container">
+        <div class="footer__inner">
+            <p class="footer__text">
+                !!!!мы вас не наебем!!!!
+            </p>
+        </div>
+
+    </div>
+</footer>
 </html>
