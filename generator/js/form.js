@@ -1,6 +1,15 @@
 
+var themes = document.getElementById('theme').value;
+
+console.log(themes)
+
+
+
+
+
+
 // скрипт вывода всез регионов РФ 
-fetch('../json/region_ru.json')
+fetch('./json/region_ru.json')
 .then(response => {
     if (!response.ok) {
         throw new Error('Network response was not ok');
@@ -19,6 +28,8 @@ fetch('../json/region_ru.json')
     });
 })
 .catch(error => console.error('Error:', error));
+
+
 
 // скрипт для формы 
 $(document).ready(function() {
