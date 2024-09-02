@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Динамическая форма</title>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <style>
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <form id="mainForm">
+        <label for="mainSelect">Выберите параметр:</label>
+        <select id="mainSelect" name="mainSelect" onchange="updateForms()">
+            <option value="">--Выберите--</option>
+            <option value="theater">theater 1</option>
+            <option value="standup">standup 2</option>
+            <option value="ballets">ballets 3</option>
+            <option value="exhibitions">exhibitions 3</option>
+            <option value="quests">quests 3</option>
+        </select>
+
+        <!-- Дополнительные формы -->
+        <div id="additionalForms" class="hidden">
+            <h3>Дополнительные формы</h3>
+
+            <!-- Форма 1: Выпадающий список, зависящий от выбора в основной форме -->
+            <div>
+                <label for="form1">Форма 1:</label>
+                <select id="form1" name="form1"></select>
+            </div>
+
+            <!-- Форма 2: Выпадающий список -->
+            <div>
+                <label for="form2">Форма 2:</label>
+                <select id="form2" name="form2">
+                    <option value="">--Выберите--</option>
+                </select>
+            </div>
+
+            <!-- Форма 3: Выбор даты -->
+            <div>
+                <label for="form3">Форма 3 (Дата):</label>
+                <input type="date" id="form3" name="form3">
+            </div>
+
+            <!-- Форма 4: Выбор времени -->
+            <div>
+                <label for="form4">Форма 4 (Время):</label>
+                <input type="time" id="form4" name="form4">
+            </div>
+        </div>
+    </form>
+
+    <script>
+        let options = {};
+
+        // Загружаем данные из JSON-файла
+        fetch('./themes.json')
+            .then(response => response.json())
+            .then(data => {
+                options = data; // Сохраняем загруженные данные в переменную options
+            })
+            .catch(error => console.error('Ошибка загрузки JSON:', error));
+
+        function updateForms() {
+            const select = document.getElementById("mainSelect");
+            const additionalForms = document.getElementById("additionalForms");
+            const form1 = document.getElementById("form1");
+
+            if (select.value && options[select.value]) {
+                additionalForms.classList.remove("hidden");
+                form1.innerHTML = options[select.value].map(option => `<option value="${option}">${option}</option>`).join('');
+            } else {
+                additionalForms.classList.add("hidden");
+                form1.innerHTML = '';
+            }
+        }
+    </script>
+    <script src="form.js"></script>
+</body>
+
+</html>
