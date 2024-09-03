@@ -1,0 +1,102 @@
+.header{
+    text-align: center;
+    padding-bottom: 20px;
+    font-size: 25px;
+}
+
+
+
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 20px;
+}
+
+form {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #333;
+}
+
+select,
+input[type="text"],
+input[type="date"],
+input[type="time"] {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 20px;
+    border: 2px solid #b8c1ec;
+    border-radius: 8px;
+    box-sizing: border-box;
+    font-size: 16px;
+    color: #333;
+    background-color: #f7faff;
+    transition: border-color 0.3s ease;
+}
+
+select:focus,
+input[type="text"]:focus,
+input[type="date"]:focus,
+input[type="time"]:focus {
+    border-color: #6c63ff;
+    outline: none;
+}
+
+#additionalForms {
+    margin-top: 20px;
+}
+
+.hidden-for-form {
+    display: none;
+}
+
+#suggestions {
+    min-width: 250px;
+    max-height: 120px;
+    overflow-y: auto;
+    position: absolute;
+    background-color: #ffffff;
+    /* Adjusted for padding */
+    z-index: 1;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.suggestion-item {
+    padding: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    color: #444;
+}
+
+.suggestion-item:hover {
+    background-color: #e6eaff;
+}
+
+.btn {
+    background-color: #6c63ff;
+    color: #ffffff;
+    padding: 12px 25px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+}
+
+.btn:hover {
+    background-color: #4d47cc;
+}
