@@ -8,7 +8,7 @@
     <title>Динамическая форма</title>
     <!-- <script src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js"></script> -->
     <!-- <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script> -->
-    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <header class="header">
@@ -16,7 +16,7 @@
 </header>
 
 <body>
-    <form id="mainForm">
+    <form id="mainForm" action="/add-event" method="post">
         <label for="mainSelect">Выберите категорию</label>
         <select id="mainSelect" name="mainSelect" onchange="updateForms()">
             <option value="">Выберите</option>
@@ -29,8 +29,8 @@
 
         <div id="additionalForms" class="hidden-for-form">
             <div>
-                <label for="form1">Выберите мироприятие</label>
-                <select id="form1" name="form1"></select>
+                <label for="name">Выберите мироприятие</label>
+                <select id="name" name="name"></select>
             </div>
 
             <div>
@@ -41,20 +41,20 @@
             </div>
 
             <div>
-                <label for="form3">Дата</label>
-                <input type="date" id="form3" name="form3">
+                <label for="date">Дата</label>
+                <input type="date" id="date" name="date">
             </div>
 
             <div>
-                <label for="form4">Время</label>
-                <input type="time" id="form4" name="form4">
+                <label for="time">Время</label>
+                <input type="time" id="time" name="time">
             </div>
 
             <button type="submit" class="btn">Отправить</button>
         </div>
     </form>
 <div></div>
-    <script src="script/form.js"></script>
+    <script src="form.js"></script>
 </body>
 
 </html>

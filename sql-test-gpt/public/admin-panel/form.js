@@ -1,3 +1,4 @@
+
 let options = {};
 
         // Загружаем данные из JSON-файла
@@ -11,7 +12,7 @@ let options = {};
         function updateForms() {
             const select = document.getElementById("mainSelect");
             const additionalForms = document.getElementById("additionalForms");
-            const form1 = document.getElementById("form1");
+            const form1 = document.getElementById("name");
 
             if (select.value && options[select.value]) {
                 additionalForms.classList.remove("hidden-for-form");
