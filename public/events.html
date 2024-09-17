@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Мероприятия</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .event-list {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .event-card {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .event-card h3 {
+            margin: 0;
+        }
+        .event-card p {
+            margin: 5px 0;
+        }
+        .details-btn {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Мероприятия категории <span id="categoryName"></span></h1>
+
+    <div class="event-list" id="eventList">
+        <!-- Мероприятия будут загружены здесь -->
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const eventList = document.getElementById('eventList');
+            const categoryName = document.getElementById('categoryName');
+
+            // Получаем категорию из URL
+            const params = new URLSearchParams(window.location.search);
+            const eventType = params.get('type');
+
+            // Устанавливаем название категории на странице
+            const eventTypes = {
+                'theater': 'Театр',
+                'stand-up': 'Стендап',
+                'ballet': 'Балет',
+                'exhibition': 'Выставка',
+                'quest': 'Квест'
+            };
+            categoryName.textContent = eventTypes[eventType];
+
+            // Загружаем мероприятия из API
+            fetch(`/api/events`)
+                .then(response => response.json())
+                .then(events => {
+                    const filteredEvents = events.filter(event => event.type === eventType);
+                    filteredEvents.forEach(event => {
+                        const eventCard = document.createElement('div');
+                        eventCard.classList.add('event-card');
+                        eventCard.innerHTML = `
+                            <h3>${event.name}</h3>
+                            <p><strong>Город:</strong> ${event.city}</p>
+                            <p><strong>Дата:</strong> ${event.date}</p>
+                            <p><strong>Время:</strong> ${event.time}</p>
+                            <a class="details-btn" href="event?id=${event.id}">Подробнее</a>
+                        `;
+                        eventList.appendChild(eventCard);
+                    });
+                });
+        });
+    </script>
+
+</body>
+</html>

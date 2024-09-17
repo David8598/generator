@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Форма события</title>
+</head>
+
+<body>
+    <form id="eventForm" method="get" action="generator">
+        <label for="eventType">Тип события:</label>
+        <input type="text" id="eventType" name="eventType" required><br><br>
+
+        <label for="eventName">Название события:</label>
+        <input type="text" id="eventName" name="eventName" required><br><br>
+
+        <label for="eventCity">Город события:</label>
+        <input type="text" id="eventCity" name="eventCity" required><br><br>
+
+        <label for="eventDate">Дата события:</label>
+        <input type="date" id="eventDate" name="eventDate" required><br><br>
+
+        <label for="eventTime">Время события:</label>
+        <input type="time" id="eventTime" name="eventTime" required><br><br>
+
+        <button type="submit">Отправить</button>
+    </form>
+
+    <script>
+        const url = new URL(window.location.href);
+        const paramValue = url.searchParams.get('url');
+        const newParagraph = document.createElement('p');
+        newParagraph.textContent = 'Ваша ссылка: https://localhost:3000/r?i=' + paramValue;
+        if (paramValue){
+            document.body.appendChild(newParagraph);         
+        }
+    </script>
+
+</body>
+
+</html>

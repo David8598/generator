@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Админ панель - Управление мероприятиями</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+
+        .form-group button {
+            padding: 10px 15px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+
+        th,
+        td {
+            padding: 10px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f4f4f4;
+        }
+
+        .delete-btn,
+        .edit-btn {
+            padding: 5px 10px;
+            margin: 5px;
+            background-color: red;
+            color: white;
+            cursor: pointer;
+            border: none;
+        }
+
+        .edit-btn {
+            background-color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Админ панель</h1>
+
+    <div class="form-container">
+        <div class="form-group">
+            <label for="type">Тип мероприятия:</label>
+            <select id="type">
+                <option value="theater">Театр</option>
+                <option value="stand-up">Стендап</option>
+                <option value="ballet">Балет</option>
+                <option value="exhibition">Выставка</option>
+                <option value="quest">Квест</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="name">Название мероприятия:</label>
+            <input type="text" id="name" placeholder="Введите название">
+        </div>
+        <div class="form-group">
+            <label for="city">Город:</label>
+            <input type="text" id="city" placeholder="Введите город">
+        </div>
+        <div class="form-group">
+            <label for="date">Дата:</label>
+            <input type="date" id="date">
+        </div>
+        <div class="form-group">
+            <label for="time">Время:</label>
+            <input type="time" id="time">
+        </div>
+
+        <div class="form-group">
+            <label for="description">Описание:</label>
+            <textarea name="description" id="description"></textarea>
+        </div>
+        <div class="form-group">
+            <input type="text" name="image" id="image" placeholder="URL изображения" />
+        </div>
+
+
+        <div class="form-group">
+            <button id="addEventBtn">Добавить мероприятие</button>
+        </div>
+    </div>
+
+    <h2>Список мероприятий</h2>
+    <table id="eventsTable">
+        <thead>
+            <tr>
+                <th>Тип</th>
+                <th>Название</th>
+                <th>Город</th>
+                <th>Дата</th>
+                <th>Время</th>
+                <th>Описание</th>
+                <th>URL Картинки</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Мероприятия будут загружены здесь -->
+        </tbody>
+    </table>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const eventsTable = document.getElementById('eventsTable').getElementsByTagName('tbody')[0];
+            const addEventBtn = document.getElementById('addEventBtn');
+
+            // Загрузка мероприятий при загрузке страницы
+            function loadEvents() {
+                fetch('/api/events')
+                    .then(response => response.json())
+                    .then(events => {
+                        eventsTable.innerHTML = '';
+                        events.forEach(event => {
+                            const row = eventsTable.insertRow();
+                            row.innerHTML = `
+                                <td>${event.type}</td>
+                                <td>${event.name}</td>
+                                <td>${event.city}</td>
+                                <td>${event.date}</td>
+                                <td>${event.time}</td>
+                                <td>${event.description}</td>
+                                <td>${event.image}</td>
+                                <td>
+                                    <button class="edit-btn" onclick="editEvent(${event.id})">Редактировать</button>
+                                    <button class="delete-btn" onclick="deleteEvent(${event.id})">Удалить</button>
+                                </td>
+                            `;
+                        });
+                    });
+            }
+
+            loadEvents();
+
+            // Добавление мероприятия
+            addEventBtn.addEventListener('click', () => {
+                const type = document.getElementById('type').value;
+                const name = document.getElementById('name').value;
+                const city = document.getElementById('city').value;
+                const date = document.getElementById('date').value;
+                const time = document.getElementById('time').value;
+                const description = document.getElementById('description').value;
+                const image = document.getElementById('image').value;
+
+
+                const event = { type, name, city, date, time, description, image };
+
+                fetch('/api/events', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(event)
+                })
+                    .then(response => response.json())
+                    .then(() => {
+                        loadEvents(); // Обновляем список мероприятий после добавления
+                        clearForm(); // Очищаем форму
+                    });
+            });
+
+            // Удаление мероприятия
+            window.deleteEvent = function (id) {
+                fetch(`/api/events/${id}`, {
+                    method: 'DELETE'
+                })
+                    .then(() => loadEvents());
+            };
+
+            // Очистка формы
+            function clearForm() {
+                document.getElementById('name').value = '';
+                document.getElementById('city').value = '';
+                document.getElementById('date').value = '';
+                document.getElementById('time').value = '';
+                document.getElementById('description').value = '';
+                document.getElementById('image').value = '';
+            }
+        });
+    </script>
+
+</body>
+
+</html>

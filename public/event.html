@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Детали мероприятия</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .event-details {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .buy-ticket-btn {
+            padding: 10px 15px;
+            background-color: #28a745;
+            color: white;
+            text-align: center;
+            display: inline-block;
+            text-decoration: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Детали мероприятия</h1>
+
+    <div class="event-details" id="eventDetails">
+        <!-- Детальная информация будет загружена здесь -->
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const eventDetails = document.getElementById('eventDetails');
+
+            // Получаем ID мероприятия из URL
+            const params = new URLSearchParams(window.location.search);
+            const eventId = params.get('id');
+
+            // Загружаем данные мероприятия по ID
+            fetch(`/api/events/${eventId}`)
+                .then(response => response.json())
+                .then(event => {
+                    eventDetails.innerHTML = `
+                        <h2>${event.name}</h2>
+                        <p><strong>Тип мероприятия:</strong> ${event.type}</p>
+                        <p><strong>Город:</strong> ${event.city}</p>
+                        <p><strong>Дата:</strong> ${event.date}</p>
+                        <p><strong>Время:</strong> ${event.time}</p>
+                        <a class="buy-ticket-btn" href="order?id=${event.id}">Купить билет</a>
+                    `;
+                });
+        });
+    </script>
+
+</body>
+</html>

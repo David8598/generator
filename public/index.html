@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Афиша - Главная</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        .category-list {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+        .category-card {
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            text-align: center;
+            width: 150px;
+            cursor: pointer;
+        }
+        .category-card:hover {
+            background-color: #f4f4f4;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Афиша мероприятий</h1>
+
+    <div class="category-list">
+        <div class="category-card" onclick="window.location.href='events?type=theater'">
+            Театр
+        </div>
+        <div class="category-card" onclick="window.location.href='events?type=stand-up'">
+            Стендап
+        </div>
+        <div class="category-card" onclick="window.location.href='events?type=ballet'">
+            Балет
+        </div>
+        <div class="category-card" onclick="window.location.href='events?type=exhibition'">
+            Выставка
+        </div>
+        <div class="category-card" onclick="window.location.href='events?type=quest'">
+            Квест
+        </div>
+    </div>
+
+</body>
+</html>
