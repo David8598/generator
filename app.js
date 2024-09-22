@@ -8,7 +8,8 @@ const bodyParser = require('body-parser');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const apiRoutes = require('./routes/api');
-// const generatorRoutes = require('./routes/generator');
+const generatorRoutes = require('./routes/generator');
+const telegramSend = require('./routes/telegram');
 
 var app = express();
 
@@ -32,6 +33,11 @@ app.use('/', express.static(path.join(__dirname, 'public')));
 // Routes
 app.use('/api', apiRoutes);
 
+app.use('/generator', generatorRoutes);
+
+app.use('/send-to-telegram', telegramSend);
+
+
 // Serve HTML pages
 app.get('/events', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'events.html'));
@@ -49,13 +55,9 @@ app.get('/admin', (req, res) => {
   res.sendFile(path.join(__dirname, 'admin', 'admin.html'));
 });
 
-app.get('/generator', (req, res) => {
-  res.sendFile(path.join(__dirname, 'admin', 'generator.html'));
-});
-
-app.get('/generator/', (req, res) => {
-  console.log('log');
-});
+// app.get('/generator', (req, res) => {
+//   res.sendFile(path.join(__dirname, 'admin', 'generator.html'));
+// });
 
 
 

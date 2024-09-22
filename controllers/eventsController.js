@@ -68,7 +68,7 @@ exports.handleFormData = (req, res) => {
       return res.status(500).send('Error saving data.');
     }
 
-    const newUrl = `http://localhost:3000/generator/?url=${lastID}`;
+    const newUrl = `http://localhost:3000/generator?url=${lastID}`;
     res.redirect(newUrl);
   });
 };

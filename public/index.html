@@ -1,56 +1,42 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+    <!-- Smartsupp Live Chat script -->
+<script type="text/javascript">
+    var _smartsupp = _smartsupp || {};
+    _smartsupp.key = 'f7f7c7ef4b6fc8c5b3afe084eda46e2da4c0906d';
+    window.smartsupp||(function(d) {
+      var s,c,o=smartsupp=function(){ o._.push(arguments)};o._=[];
+      s=d.getElementsByTagName('script')[0];c=d.createElement('script');
+      c.type='text/javascript';c.charset='utf-8';c.async=true;
+      c.src='https://www.smartsuppchat.com/loader.js?';s.parentNode.insertBefore(c,s);
+    })(document);
+    </script>
+    <noscript> Powered by <a href=“https://www.smartsupp.com” target=“_blank”>Smartsupp</a></noscript>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Афиша - Главная</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            text-align: center;
-        }
-        .category-list {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-        }
-        .category-card {
-            padding: 20px;
-            border: 1px solid #ccc;
-            border-radius: 5px;
-            text-align: center;
-            width: 150px;
-            cursor: pointer;
-        }
-        .category-card:hover {
-            background-color: #f4f4f4;
-        }
-    </style>
+    <link rel="stylesheet" href="./stylesheets/style_index.css">
+    
 </head>
 <body>
 
-    <h1>Афиша мероприятий</h1>
-
-    <div class="category-list">
-        <div class="category-card" onclick="window.location.href='events?type=theater'">
-            Театр
-        </div>
-        <div class="category-card" onclick="window.location.href='events?type=stand-up'">
-            Стендап
-        </div>
-        <div class="category-card" onclick="window.location.href='events?type=ballet'">
-            Балет
-        </div>
-        <div class="category-card" onclick="window.location.href='events?type=exhibition'">
-            Выставка
-        </div>
-        <div class="category-card" onclick="window.location.href='events?type=quest'">
-            Квест
-        </div>
+<header class="header">
+    <div class="header__innder">
+        <div class="logo"></div>
+        <ul class="header__menu">
+            <li class="menu-item"><a href="#">театр</a></li>
+            <li class="menu-item"><a href="#">Балет</a></li>
+            <li class="menu-item"><a href="#">Стендап</a></li>
+            <li class="menu-item"><a href="#">Выставки</a></li>
+            <li class="menu-item"><a href="#">Квесты</a></li>     
+        </ul>
     </div>
+</header>
+<div class="body">
+
+    
+</div>
 
 </body>
 </html>

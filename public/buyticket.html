@@ -62,7 +62,7 @@
             <label for="time">Время:</label>
             <input type="text" id="time" disabled>
         </div>
-        <button class="order-btn">Оформить заказ</button>
+        <button class="submit">Оформить заказ</button>
     </div>
 
     <script>
@@ -79,8 +79,41 @@
                     document.getElementById('city').value = event.city;
                     document.getElementById('date').value = event.date;
                     document.getElementById('time').value = event.time;
+                })
+                .catch(error => {
+                    console.error('Ошибка при загрузке данных мероприятия:', error);
                 });
         });
+
+        // Ищем форму по ID
+        const form = document.querySelector('.submit');
+
+        form.addEventListener('click', function (event) {
+            event.preventDefault(); // Предотвращаем стандартное поведение отправки формы
+
+            const formData = {
+                name: document.getElementById('name').value,
+                city: document.getElementById('city').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value
+            };
+
+            fetch('/send-to-telegram', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .catch((error) => {
+                console.error('Ошибка:', error);
+            });
+        });
+    </script>
+
+
+
     </script>
 
 </body>
